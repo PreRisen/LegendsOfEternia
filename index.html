@@ -1128,9 +1128,11 @@
     </div>
     
     <script>
-        // Auto-detect protocol (works with both HTTP and HTTPS)
-        const protocol = window.location.protocol === 'https:' ? 'https' : 'http';
-        const socket = io(`${protocol}://70.120.52.135:5000`);
+        const useHttps = window.location.protocol === 'https:';
+		const socket = io(`${useHttps ? 'https' : 'http'}://70.120.52.135:5000`, {
+			secure: useHttps
+		});
+
         
         let character = null;
         let shopItems = {};
