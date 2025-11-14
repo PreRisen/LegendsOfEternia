@@ -1092,6 +1092,7 @@
                 <button class="nav-btn" onclick="showTab('shop')">🛒 Shop</button>
                 <button class="nav-btn" onclick="showTab('pet')">🐾 Pet</button>
                 <button class="nav-btn" onclick="showLeaderboard()">🏆 Leaderboard</button>
+                <button class="nav-btn" onclick="showNews()">📰 News</button>
                 <button class="nav-btn" onclick="showGMPanel()" style="margin-top: 10px;">⚡ GM Panel</button>
                 <button class="nav-btn btn-red" onclick="logout()" style="margin-top: 20px;">🚪 Logout</button>
             </div>
@@ -1907,11 +1908,6 @@
                             </div>
                         `;
                     }).join('')}
-                </div>
-                
-                <!-- Item Comparison Tooltip -->
-                <div id="itemComparisonTooltip" style="display: none; position: fixed; background: rgba(0,0,0,0.95); border: 2px solid #3b82f6; border-radius: 8px; padding: 15px; z-index: 10000; max-width: 400px; pointer-events: none;">
-                    <!-- Comparison content will be inserted here -->
                 </div>
             `;
             contentArea.innerHTML = html;
@@ -2916,6 +2912,92 @@
     // Leaderboard
     let leaderboardData = [];
     
+    function showNews() {
+        currentTab = 'news';
+        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+        const newsBtn = Array.from(document.querySelectorAll('.nav-btn')).find(b => b.textContent.includes('News'));
+        if (newsBtn) newsBtn.classList.add('active');
+        
+        const contentArea = document.getElementById('contentArea');
+        contentArea.innerHTML = `
+            <div style="background: #1e293b; padding: 20px; border-radius: 8px; margin-bottom: 20px; border: 2px solid #374151;">
+                <h2 style="color: #fbbf24; margin: 0 0 10px 0;">📰 News & Updates</h2>
+                <p style="color: #9ca3af; margin: 0;">Latest changes and announcements</p>
+            </div>
+            
+            <div style="display: flex; flex-direction: column; gap: 15px;">
+                <!-- Latest Update -->
+                <div style="background: #1e293b; padding: 20px; border-radius: 8px; border-left: 4px solid #10b981;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <div>
+                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 5px;">
+                                <span style="font-size: 1.5em;">🐛</span>
+                                <h3 style="color: #fbbf24; margin: 0;">Bug Fixes</h3>
+                            </div>
+                            <div style="display: inline-block; background: #10b981; color: #000; padding: 2px 8px; border-radius: 4px; font-size: 0.75em; font-weight: bold;">FIX</div>
+                        </div>
+                        <div style="color: #9ca3af; font-size: 0.9em;">Nov 14, 2025</div>
+                    </div>
+                    <div style="color: #d1d5db;">
+                        <strong>Fixed Issues:</strong>
+                        <ul style="margin: 10px 0; padding-left: 20px;">
+                            <li>Level 1 gear now rolls proper stats</li>
+                            <li>Auction sellers get paid instantly</li>
+                            <li>Online players list shows correctly</li>
+                            <li>Fixed stuck UI tooltip</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Game Launch -->
+                <div style="background: #1e293b; padding: 20px; border-radius: 8px; border-left: 4px solid #3b82f6;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <div>
+                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 5px;">
+                                <span style="font-size: 1.5em;">✨</span>
+                                <h3 style="color: #fbbf24; margin: 0;">Game Launch</h3>
+                            </div>
+                            <div style="display: inline-block; background: #3b82f6; color: #fff; padding: 2px 8px; border-radius: 4px; font-size: 0.75em; font-weight: bold;">FEATURE</div>
+                        </div>
+                        <div style="color: #9ca3af; font-size: 0.9em;">Nov 13, 2025</div>
+                    </div>
+                    <div style="color: #d1d5db;">
+                        <strong>Welcome to Legends of Eternia!</strong>
+                        <ul style="margin: 10px 0; padding-left: 20px;">
+                            <li>100 levels across 20 zones</li>
+                            <li>6 classes with unique skills</li>
+                            <li>Boss battles & epic loot</li>
+                            <li>Auction house economy</li>
+                            <li>Pet system</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Coming Soon -->
+                <div style="background: #1e293b; padding: 20px; border-radius: 8px; border-left: 4px solid #f59e0b;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <div>
+                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 5px;">
+                                <span style="font-size: 1.5em;">🚀</span>
+                                <h3 style="color: #fbbf24; margin: 0;">Coming Soon</h3>
+                            </div>
+                            <div style="display: inline-block; background: #f59e0b; color: #000; padding: 2px 8px; border-radius: 4px; font-size: 0.75em; font-weight: bold;">UPCOMING</div>
+                        </div>
+                    </div>
+                    <div style="color: #9ca3af;">
+                        <p>Planned features:</p>
+                        <ul style="margin: 10px 0; padding-left: 20px;">
+                            <li>Guild system</li>
+                            <li>PvP Arena</li>
+                            <li>Daily quests</li>
+                            <li>More zones & bosses</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+    
     function showLeaderboard() {
         currentTab = 'leaderboard';
         document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
@@ -3581,11 +3663,6 @@
                         `;
                     }).join('')}
                 </div>
-                
-                <!-- Item Comparison Tooltip -->
-                <div id="itemComparisonTooltip" style="display: none; position: fixed; background: linear-gradient(135deg, #1a0d0d 0%, #0f0808 100%); border: 2px solid #8b0000; border-radius: 8px; padding: 15px; z-index: 10000; max-width: 400px; pointer-events: none; box-shadow: 0 0 20px rgba(139, 0, 0, 0.5);">
-                    <!-- Comparison content will be inserted here -->
-                </div>
             `;
             contentArea.innerHTML = html;
             
@@ -4001,6 +4078,11 @@
                 <div class="turn-icon"></div>
                 <div class="turn-text"></div>
             </div>
+        </div>
+        
+        <!-- Global Item Comparison Tooltip -->
+        <div id="itemComparisonTooltip" style="display: none; position: fixed; background: linear-gradient(135deg, #1a0d0d 0%, #0f0808 100%); border: 2px solid #8b0000; border-radius: 8px; padding: 15px; z-index: 10000; max-width: 400px; pointer-events: none; box-shadow: 0 0 20px rgba(139, 0, 0, 0.5);">
+            <!-- Comparison content will be inserted here -->
         </div>
 </body>
 </html>
